@@ -492,8 +492,27 @@ function generarPlanilla() {
                 // Priorizar por última fecha de asignación en historial (ascendente)
                 candTerrs.sort((a, b) => getUltimaFechaTerritorio(a.id) - getUltimaFechaTerritorio(b.id));
 
+                // Filtrar para evitar repetir el mismo turno consecutivo del territorio
+                let candTerrsTurnoOpuesto = candTerrs.filter(t => {
+                    // Buscar último registro de este territorio en el historial
+                    const ult = [...appState.historial]
+                        .reverse()
+                        .find(h => h.territorioId == t.id);
+                    // Si nunca se usó o el último turno fue distinto al actual, es apto
+                    return !ult || ult.turnoId !== turno.id;
+                });
+                
+                // Si al filtrar nos quedamos sin candidatos, volvemos a la lista ordenada completa
+                if (candTerrsTurnoOpuesto.length > 0) {
+                    candTerrs = candTerrsTurnoOpuesto;
+                }
+
                 if (candTerrs.length > 0) {
-                    const selectedT = candTerrs[0];
+                    // Tomar de entre los más antiguos (ej: los primeros 4 o el 50% de los más antiguos) al azar
+                    const poolSize = Math.min(5, candTerrs.length);
+                    const mejores = candTerrs.slice(0, poolSize);
+                    const selectedT = mejores[Math.floor(Math.random() * mejores.length)];
+                    
                     row.territorioId = selectedT.id;
                     row.encuentro = selectedT.encuentro;
                     row.noVisitar = selectedT.noVisitar;
