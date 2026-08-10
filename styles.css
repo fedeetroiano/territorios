@@ -1,20 +1,18 @@
 /* Base variables and reset */
 :root {
-    --primary-color: #3b82f6; /* Blue */
-    --primary-hover: #2563eb;
-    --secondary-color: #f1f5f9;
-    --secondary-hover: #e2e8f0;
-    --bg-color: #f8fafc;
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+    --secondary-color: #f8fafc;
+    --secondary-hover: #f1f5f9;
+    --bg-color: #f1f5f9;
     --surface-color: #ffffff;
-    --text-color: #1e293b;
+    --text-color: #0f172a;
     --text-light: #64748b;
-    --border-color: #e2e8f0;
+    --border-color: #cbd5e1;
     
     /* Planilla specific colors */
-    --table-header-bg: #bfdbfe; /* Light blue excel style */
-    --table-border: #94a3b8;
-    --table-purple-bg: #e9d5ff;
-    --table-orange-bg: #ffedd5;
+    --table-header-bg: #bfdbfe;
+    --table-border: #cbd5e1;
 }
 
 * {
@@ -323,6 +321,7 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    /* El aspect-ratio se maneja dinámicamente desde JS para la exportación */
 }
 
 .planilla-header {
@@ -379,15 +378,28 @@ body {
 
 /* Day Column Styling */
 .planilla-table td.dia-col {
-    background-color: #f5f3ff;
-    color: #5b21b6;
+    background-color: rgba(255, 255, 255, 0.3); /* Let row color show through */
+    color: #1e293b;
     font-weight: 800;
     text-align: center;
-    border-right: 1.5px solid #ddd6fe;
-    border-bottom: 1.5px solid #ddd6fe;
+    border-right: 1.5px solid rgba(0,0,0,0.05);
+    border-bottom: 1.5px solid rgba(0,0,0,0.05);
     font-size: 1.05em;
     text-transform: uppercase;
     letter-spacing: 0.02em;
+}
+
+/* Colores pastel por día */
+.fila-mar { background-color: #e0f2fe; } /* Celeste Pastel */
+.fila-mie { background-color: #dcfce7; } /* Verde Menta Pastel */
+.fila-jue { background-color: #fef9c3; } /* Amarillo Pastel */
+.fila-vie { background-color: #f3e8ff; } /* Lila Pastel */
+.fila-sab { background-color: #ffedd5; } /* Durazno Pastel */
+.fila-dom { background-color: #fce7f3; } /* Rosa Pastel */
+
+/* Transparencia sutil para celdas editables para que se fundan mejor */
+select.edit-cell, input.edit-cell, div.edit-cell {
+    background-color: rgba(255, 255, 255, 0.65);
 }
 
 .zoom-lluvia-section {

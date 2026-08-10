@@ -688,6 +688,7 @@ function renderPlanilla() {
 
     appState.ultimoGenerado.asignaciones.forEach((row, idx) => {
         const tr = document.createElement('tr');
+        tr.className = `fila-${row.diaId}`;
         const rowspan = row.totalTurnos || (row.diaId === 'mie' ? 1 : 2);
         let diaHtml = row.diaNombre ? `<td class="dia-col" rowspan="${rowspan}">${row.diaNombre}</td>` : '';
         
@@ -786,6 +787,9 @@ function renderPlanilla() {
 
 function exportarImagen() {
     const el = document.getElementById('planilla-capture-area');
+    const formatSelect = document.getElementById('export-format');
+    const selectedFormat = formatSelect ? formatSelect.value : 'auto';
+
     const scale = appState.ajustes.fontScale || 100;
     const basePx = 18;
     const currentPx = basePx * (scale / 100);
@@ -793,6 +797,14 @@ function exportarImagen() {
     el.style.fontSize = `${currentPx}px`;
     el.style.background = 'white';
     el.style.padding = '20px';
+
+    if (selectedFormat !== 'auto') {
+        el.style.aspectRatio = selectedFormat.replace(':', '/');
+        // Ensure flex layout so content centers inside the forced box if needed
+        el.style.display = 'flex';
+        el.style.flexDirection = 'column';
+        el.style.justifyContent = 'flex-start';
+    }
     
     // Ocultamos bordes, fondo y sombras de inputs para la foto y asignamos fontSize explícito
     const inputs = el.querySelectorAll('input.edit-cell, select.edit-cell, div.edit-cell');
@@ -819,6 +831,14 @@ function exportarImagen() {
             i.style.fontWeight = '';
             i.style.fontSize = '';
         });
+
+        el.style.fontSize = '';
+        el.style.background = '';
+        el.style.padding = '';
+        el.style.aspectRatio = '';
+        el.style.display = '';
+        el.style.flexDirection = '';
+        el.style.justifyContent = '';
 
         const link = document.createElement('a');
         link.download = `Planilla_Territorios_${appState.ultimoGenerado.fecha}.png`;

@@ -43,6 +43,15 @@
                         </div>
                         <button id="btn-generate" class="btn btn-secondary">Generar Borrador</button>
                         <button id="btn-save-week" class="btn btn-primary">Guardar Planilla (Confirmar)</button>
+                        <div class="format-control" style="display: inline-flex; align-items: center; margin-right: 10px;">
+                            <span class="font-control-label" style="font-size: 0.85rem; font-weight: 600; color: var(--text-color); margin-right: 8px;">Formato:</span>
+                            <select id="export-format" class="edit-cell" style="width: auto; padding: 4px 8px; height: auto;">
+                                <option value="1:1">Cuadrado 1:1</option>
+                                <option value="16:9">Horizontal 16:9</option>
+                                <option value="9:16">Vertical 9:16</option>
+                                <option value="auto">Automático</option>
+                            </select>
+                        </div>
                         <button id="btn-export" class="btn btn-secondary">Exportar a Imagen</button>
                         <button id="btn-print" class="btn btn-secondary">Imprimir PDF</button>
                     </div>
