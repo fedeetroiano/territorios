@@ -34,6 +34,13 @@
                 <div class="header-actions no-print">
                     <h1>Planilla Semanal</h1>
                     <div class="btn-group">
+                        <div class="font-size-control">
+                            <span class="font-control-label">Tamaño Letra:</span>
+                            <button id="btn-font-dec" class="btn btn-secondary btn-sm" title="Disminuir letra">A-</button>
+                            <input type="range" id="font-size-range" min="80" max="180" step="5" value="100">
+                            <button id="btn-font-inc" class="btn btn-secondary btn-sm" title="Aumentar letra">A+</button>
+                            <span id="font-size-indicator">100%</span>
+                        </div>
                         <button id="btn-generate" class="btn btn-secondary">Generar Borrador</button>
                         <button id="btn-save-week" class="btn btn-primary">Guardar Planilla (Confirmar)</button>
                         <button id="btn-export" class="btn btn-secondary">Exportar a Imagen</button>
@@ -177,6 +184,19 @@
                             <input type="text" id="setting-zoom-miercoles" placeholder="Ej: Zoom o Terr. 5">
                         </div>
                         <button id="btn-save-zoom" class="btn btn-primary">Guardar Zoom</button>
+                    </div>
+
+                    <div class="card">
+                        <h3>Tamaño de Letra de Planilla</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 15px;">
+                            Ajusta el tamaño del texto para regular la lectura en pantalla y en la foto PNG exportada.
+                        </p>
+                        <div class="font-size-control">
+                            <button id="btn-font-dec-ajustes" class="btn btn-secondary btn-sm">A-</button>
+                            <input type="range" id="font-size-range-ajustes" min="80" max="180" step="5" value="100">
+                            <button id="btn-font-inc-ajustes" class="btn btn-secondary btn-sm">A+</button>
+                            <span id="font-size-indicator-ajustes">100%</span>
+                        </div>
                     </div>
 
                     <div class="card">

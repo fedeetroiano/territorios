@@ -19,7 +19,10 @@ function loadState() {
         appState = JSON.parse(saved);
         // Migraciones básicas por si faltan datos en versiones previas
         if (!appState.ajustes) {
-            appState.ajustes = { horaM: '10:00', horaT: '16:30', zoomLluvia: '', zoomMiercoles: 'ZOOM' };
+            appState.ajustes = { horaM: '10:00', horaT: '16:30', zoomLluvia: '', zoomMiercoles: 'ZOOM', fontScale: 100 };
+        }
+        if (!appState.ajustes.fontScale) {
+            appState.ajustes.fontScale = 100;
         }
         if (!appState.historial) {
             appState.historial = [];
@@ -162,6 +165,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Nueva inicialización del historial
     renderHistorial();
     
+    applyFontScale(appState.ajustes.fontScale || 100);
+    initFontControls();
+
     const searchHist = document.getElementById('search-historial');
     if (searchHist) {
         searchHist.addEventListener('input', renderHistorial);
@@ -388,12 +394,64 @@ window.deleteTerritorio = function(id) {
     }
 }
 
+// --- Control de Tamaño de Letra ---
+function applyFontScale(scale) {
+    scale = Math.min(180, Math.max(80, parseInt(scale) || 100));
+    appState.ajustes.fontScale = scale;
+
+    const captureArea = document.getElementById('planilla-capture-area');
+    if (captureArea) {
+        captureArea.style.setProperty('--planilla-scale', (scale / 100));
+    }
+
+    const range1 = document.getElementById('font-size-range');
+    const ind1 = document.getElementById('font-size-indicator');
+    if (range1) range1.value = scale;
+    if (ind1) ind1.innerText = `${scale}%`;
+
+    const range2 = document.getElementById('font-size-range-ajustes');
+    const ind2 = document.getElementById('font-size-indicator-ajustes');
+    if (range2) range2.value = scale;
+    if (ind2) ind2.innerText = `${scale}%`;
+}
+
+function initFontControls() {
+    const bindControl = (rangeId, decBtnId, incBtnId) => {
+        const range = document.getElementById(rangeId);
+        const decBtn = document.getElementById(decBtnId);
+        const incBtn = document.getElementById(incBtnId);
+
+        if (range) {
+            range.addEventListener('input', (e) => {
+                applyFontScale(e.target.value);
+                saveState();
+            });
+        }
+        if (decBtn) {
+            decBtn.addEventListener('click', () => {
+                applyFontScale((appState.ajustes.fontScale || 100) - 5);
+                saveState();
+            });
+        }
+        if (incBtn) {
+            incBtn.addEventListener('click', () => {
+                applyFontScale((appState.ajustes.fontScale || 100) + 5);
+                saveState();
+            });
+        }
+    };
+
+    bindControl('font-size-range', 'btn-font-dec', 'btn-font-inc');
+    bindControl('font-size-range-ajustes', 'btn-font-dec-ajustes', 'btn-font-inc-ajustes');
+}
+
 // --- Ajustes ---
 function renderAjustes() {
     document.getElementById('setting-hora-m').value = appState.ajustes.horaM || '10:00';
     document.getElementById('setting-hora-t').value = appState.ajustes.horaT || '16:30';
     document.getElementById('setting-zoom-lluvia').value = appState.ajustes.zoomLluvia || '';
     document.getElementById('setting-zoom-miercoles').value = appState.ajustes.zoomMiercoles || 'ZOOM';
+    applyFontScale(appState.ajustes.fontScale || 100);
 }
 
 function saveAjustes() {
@@ -567,6 +625,8 @@ function generarPlanilla() {
 
 function renderPlanilla() {
     if (!appState.ultimoGenerado) return;
+
+    applyFontScale(appState.ajustes.fontScale || 100);
 
     document.getElementById('week-date-range').innerText = appState.ultimoGenerado.fecha;
     document.getElementById('lluvia-terris-display').innerText = appState.ajustes.zoomLluvia;

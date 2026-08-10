@@ -275,7 +275,47 @@ body {
 
 /* --- Planilla Semanal Estilo Excel --- */
 /* --- Planilla Semanal - Modern & Fresh HTML Style --- */
+/* Font size control bar */
+.font-size-control {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #f1f5f9;
+    padding: 4px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.font-control-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-color);
+    white-space: nowrap;
+}
+
+.font-size-control input[type="range"] {
+    width: 80px;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+    vertical-align: middle;
+}
+
+.font-size-control .btn-sm {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    font-weight: 800;
+}
+
+#font-size-indicator, #font-size-indicator-ajustes {
+    font-size: 0.85rem;
+    font-weight: 800;
+    min-width: 42px;
+    text-align: center;
+    color: var(--primary-color);
+}
+
 .planilla-container {
+    --planilla-scale: 1;
     background: var(--surface-color);
     padding: 30px;
     border-radius: 16px;
@@ -297,7 +337,7 @@ body {
 .planilla-header h2 {
     color: #1e40af;
     font-weight: 800;
-    font-size: 2.1rem;
+    font-size: calc(2.1rem * var(--planilla-scale, 1));
     letter-spacing: -0.02em;
 }
 
@@ -309,10 +349,10 @@ body {
 
 .planilla-table th, .planilla-table td {
     border: 1.5px solid var(--border-color);
-    padding: 16px 14px;
+    padding: calc(16px * var(--planilla-scale, 1)) calc(14px * var(--planilla-scale, 1));
     text-align: left;
     vertical-align: middle;
-    font-size: 1.25rem;
+    font-size: calc(1.25rem * var(--planilla-scale, 1));
     font-weight: 700;
     color: #0f172a;
 }
@@ -322,9 +362,9 @@ body {
     color: #0f172a;
     font-weight: 800;
     text-transform: uppercase;
-    font-size: 1.05rem;
+    font-size: calc(1.05rem * var(--planilla-scale, 1));
     letter-spacing: 0.04em;
-    padding: 16px 14px;
+    padding: calc(16px * var(--planilla-scale, 1)) calc(14px * var(--planilla-scale, 1));
 }
 
 .planilla-table th:first-child {
@@ -345,7 +385,7 @@ body {
     text-align: center;
     border-right: 1.5px solid #ddd6fe;
     border-bottom: 1.5px solid #ddd6fe;
-    font-size: 1.3rem;
+    font-size: calc(1.3rem * var(--planilla-scale, 1));
     text-transform: uppercase;
     letter-spacing: 0.02em;
 }
@@ -354,11 +394,11 @@ body {
     background-color: #fffbeb;
     border: 1.5px solid #fde68a;
     border-radius: 12px;
-    padding: 18px 24px;
+    padding: calc(18px * var(--planilla-scale, 1)) calc(24px * var(--planilla-scale, 1));
     text-align: left;
     margin-top: 25px;
     color: #92400e;
-    font-size: 1.25rem;
+    font-size: calc(1.25rem * var(--planilla-scale, 1));
     font-weight: 700;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
 }
@@ -371,12 +411,12 @@ body {
 
 select.edit-cell, input.edit-cell, div.edit-cell {
     width: 100%;
-    padding: 10px 14px;
+    padding: calc(10px * var(--planilla-scale, 1)) calc(14px * var(--planilla-scale, 1));
     border: 1.5px solid #cbd5e1;
     background-color: #f8fafc;
     border-radius: 8px;
     font-family: inherit;
-    font-size: 1.2rem;
+    font-size: calc(1.2rem * var(--planilla-scale, 1));
     font-weight: 700;
     color: #0f172a;
     transition: all 0.2s ease;
@@ -387,7 +427,7 @@ select.edit-cell, input.edit-cell, div.edit-cell {
 }
 
 select.edit-cell, input.edit-cell[type="time"] {
-    height: 48px;
+    height: calc(48px * var(--planilla-scale, 1));
 }
 
 select.edit-cell:hover, input.edit-cell:hover, div.edit-cell:hover {
@@ -402,7 +442,7 @@ select.edit-cell:focus, input.edit-cell:focus, div.edit-cell:focus {
 }
 
 div.edit-cell {
-    min-height: 48px;
+    min-height: calc(48px * var(--planilla-scale, 1));
     text-align: left;
     white-space: pre-wrap;
     word-break: break-word;
@@ -413,13 +453,13 @@ div.edit-cell {
 /* Select specific styling */
 select.edit-cell {
     cursor: pointer;
-    min-width: 170px;
+    min-width: calc(170px * var(--planilla-scale, 1));
     font-weight: 700;
 }
 
 /* Inputs specific styling */
 input.edit-cell[type="time"] {
-    max-width: 125px;
+    max-width: calc(125px * var(--planilla-scale, 1));
     text-align: center;
     font-weight: 800;
 }
@@ -428,7 +468,7 @@ input.edit-cell[type="time"] {
     text-align: left !important;
 }
 .text-small {
-    font-size: 1.15rem;
+    font-size: calc(1.15rem * var(--planilla-scale, 1));
     font-weight: 700;
 }
 
