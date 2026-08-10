@@ -296,33 +296,35 @@ body {
 
 .planilla-header h2 {
     color: #1e40af;
-    font-weight: 700;
-    font-size: 1.75rem;
+    font-weight: 800;
+    font-size: 2.1rem;
     letter-spacing: -0.02em;
 }
 
 .planilla-table {
     width: 100%;
     border-collapse: collapse;
-    border: 1px solid var(--border-color);
+    border: 1.5px solid var(--border-color);
 }
 
 .planilla-table th, .planilla-table td {
-    border: 1px solid var(--border-color);
-    padding: 14px 12px;
+    border: 1.5px solid var(--border-color);
+    padding: 16px 14px;
     text-align: left;
     vertical-align: middle;
-    font-size: 1.1rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f172a;
 }
 
 .planilla-table th {
     background-color: var(--secondary-color);
-    color: var(--text-light);
-    font-weight: 700;
+    color: #0f172a;
+    font-weight: 800;
     text-transform: uppercase;
-    font-size: 0.95rem;
-    letter-spacing: 0.05em;
-    padding: 14px 12px;
+    font-size: 1.05rem;
+    letter-spacing: 0.04em;
+    padding: 16px 14px;
 }
 
 .planilla-table th:first-child {
@@ -338,42 +340,45 @@ body {
 /* Day Column Styling */
 .planilla-table td.dia-col {
     background-color: #f5f3ff;
-    color: #6d28d9;
-    font-weight: 700;
+    color: #5b21b6;
+    font-weight: 800;
     text-align: center;
-    border-right: 1px solid #ddd6fe;
-    border-bottom: 1px solid #ddd6fe;
-    font-size: 1.1rem;
+    border-right: 1.5px solid #ddd6fe;
+    border-bottom: 1.5px solid #ddd6fe;
+    font-size: 1.3rem;
     text-transform: uppercase;
     letter-spacing: 0.02em;
 }
 
 .zoom-lluvia-section {
     background-color: #fffbeb;
-    border: 1px solid #fef3c7;
+    border: 1.5px solid #fde68a;
     border-radius: 12px;
-    padding: 16px 22px;
+    padding: 18px 24px;
     text-align: left;
     margin-top: 25px;
-    color: #b45309;
-    font-size: 1.1rem;
+    color: #92400e;
+    font-size: 1.25rem;
+    font-weight: 700;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
 .zoom-lluvia-section strong {
     margin-right: 10px;
-    color: #92400e;
+    color: #78350f;
+    font-weight: 800;
 }
 
 select.edit-cell, input.edit-cell, div.edit-cell {
     width: 100%;
-    padding: 8px 12px;
-    border: 1px solid var(--border-color);
+    padding: 10px 14px;
+    border: 1.5px solid #cbd5e1;
     background-color: #f8fafc;
     border-radius: 8px;
     font-family: inherit;
-    font-size: 1.05rem;
-    color: var(--text-color);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #0f172a;
     transition: all 0.2s ease;
     outline: none;
     box-shadow: inset 0 1px 2px rgba(0,0,0,0.02);
@@ -382,11 +387,11 @@ select.edit-cell, input.edit-cell, div.edit-cell {
 }
 
 select.edit-cell, input.edit-cell[type="time"] {
-    height: 42px;
+    height: 48px;
 }
 
 select.edit-cell:hover, input.edit-cell:hover, div.edit-cell:hover {
-    border-color: #cbd5e1;
+    border-color: #94a3b8;
     background-color: #f1f5f9;
 }
 
@@ -397,31 +402,34 @@ select.edit-cell:focus, input.edit-cell:focus, div.edit-cell:focus {
 }
 
 div.edit-cell {
-    min-height: 42px;
+    min-height: 48px;
     text-align: left;
     white-space: pre-wrap;
     word-break: break-word;
     cursor: text;
+    font-weight: 700;
 }
 
 /* Select specific styling */
 select.edit-cell {
     cursor: pointer;
-    min-width: 150px;
+    min-width: 170px;
+    font-weight: 700;
 }
 
 /* Inputs specific styling */
 input.edit-cell[type="time"] {
-    max-width: 110px;
+    max-width: 125px;
     text-align: center;
-    font-weight: 600;
+    font-weight: 800;
 }
 
 .text-left {
     text-align: left !important;
 }
 .text-small {
-    font-size: 1rem;
+    font-size: 1.15rem;
+    font-weight: 700;
 }
 
 .badge {

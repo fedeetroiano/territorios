@@ -693,9 +693,11 @@ function exportarImagen() {
         i.style.boxShadow = 'none';
         i.style.appearance = 'none';
         i.style.webkitAppearance = 'none';
+        i.style.color = '#000000';
+        i.style.fontWeight = '700';
     });
 
-    html2canvas(el, { scale: 2 }).then(canvas => {
+    html2canvas(el, { scale: 2.5 }).then(canvas => {
         // Restaurar estilos
         inputs.forEach(i => {
             i.style.border = '';
@@ -703,6 +705,8 @@ function exportarImagen() {
             i.style.boxShadow = '';
             i.style.appearance = '';
             i.style.webkitAppearance = '';
+            i.style.color = '';
+            i.style.fontWeight = '';
         });
 
         const link = document.createElement('a');
