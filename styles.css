@@ -389,13 +389,14 @@ body {
     letter-spacing: 0.02em;
 }
 
-/* Colores pastel por día */
-.fila-mar { background-color: #e0f2fe; } /* Celeste Pastel */
-.fila-mie { background-color: #dcfce7; } /* Verde Menta Pastel */
-.fila-jue { background-color: #fef9c3; } /* Amarillo Pastel */
-.fila-vie { background-color: #f3e8ff; } /* Lila Pastel */
-.fila-sab { background-color: #ffedd5; } /* Durazno Pastel */
-.fila-dom { background-color: #fce7f3; } /* Rosa Pastel */
+/* Colores pastel intercalados */
+.fila-celeste { background-color: #e0f2fe; } /* Celeste Pastel */
+.fila-menta { background-color: #dcfce7; } /* Verde Menta Pastel */
+.fila-amarillo { background-color: #fef9c3; } /* Amarillo Pastel */
+.fila-lila { background-color: #f3e8ff; } /* Lila Pastel */
+.fila-durazno { background-color: #ffedd5; } /* Durazno Pastel */
+.fila-rosa { background-color: #fce7f3; } /* Rosa Pastel */
+.fila-blanco { background-color: #ffffff; } /* Blanco intercalado */
 
 /* Transparencia sutil para celdas editables para que se fundan mejor */
 select.edit-cell, input.edit-cell, div.edit-cell {

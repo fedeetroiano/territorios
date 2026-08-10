@@ -553,6 +553,10 @@ function generarPlanilla() {
     // Contadores de uso en esta generación para evitar repetir en la misma semana
     let conductoresUsados = {};
     let territoriosUsados = {};
+    
+    const pastelColors = ['celeste', 'menta', 'amarillo', 'lila', 'durazno', 'rosa'];
+    const baseColor = pastelColors[Math.floor(Math.random() * pastelColors.length)];
+    let dayIndex = 0;
 
     estructuraSemana.forEach(dia => {
         // Filtrar turnos según la configuración en appState.ajustes.turnosActivos
@@ -567,6 +571,9 @@ function generarPlanilla() {
         if (turnosActivosDelDia.length === 0) return;
 
         const totalTurnos = turnosActivosDelDia.length;
+        const colorClaseDia = (dayIndex % 2 === 0) ? baseColor : 'blanco';
+        dayIndex++;
+
         turnosActivosDelDia.forEach((turno, index) => {
             let row = {
                 diaNombre: index === 0 ? dia.nombreDia : '',
@@ -577,7 +584,8 @@ function generarPlanilla() {
                 conductorId: '',
                 noVisitar: '',
                 turnoId: turno.id,
-                diaId: dia.diaId
+                diaId: dia.diaId,
+                colorClase: colorClaseDia
             };
 
             // Casos especiales
@@ -688,7 +696,8 @@ function renderPlanilla() {
 
     appState.ultimoGenerado.asignaciones.forEach((row, idx) => {
         const tr = document.createElement('tr');
-        tr.className = `fila-${row.diaId}`;
+        // Usa el color guardado o retrocompatibilidad con el diaId si es planilla vieja
+        tr.className = row.colorClase ? `fila-${row.colorClase}` : `fila-${row.diaId}`;
         const rowspan = row.totalTurnos || (row.diaId === 'mie' ? 1 : 2);
         let diaHtml = row.diaNombre ? `<td class="dia-col" rowspan="${rowspan}">${row.diaNombre}</td>` : '';
         
