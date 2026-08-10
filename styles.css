@@ -297,7 +297,7 @@ body {
 .planilla-header h2 {
     color: #1e40af;
     font-weight: 700;
-    font-size: 1.4rem;
+    font-size: 1.75rem;
     letter-spacing: -0.02em;
 }
 
@@ -312,17 +312,17 @@ body {
     padding: 14px 12px;
     text-align: left;
     vertical-align: middle;
-    font-size: 0.95rem;
+    font-size: 1.1rem;
 }
 
 .planilla-table th {
     background-color: var(--secondary-color);
     color: var(--text-light);
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
-    font-size: 0.75rem;
+    font-size: 0.95rem;
     letter-spacing: 0.05em;
-    padding: 12px;
+    padding: 14px 12px;
 }
 
 .planilla-table th:first-child {
@@ -343,7 +343,7 @@ body {
     text-align: center;
     border-right: 1px solid #ddd6fe;
     border-bottom: 1px solid #ddd6fe;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     text-transform: uppercase;
     letter-spacing: 0.02em;
 }
@@ -352,11 +352,11 @@ body {
     background-color: #fffbeb;
     border: 1px solid #fef3c7;
     border-radius: 12px;
-    padding: 15px 20px;
+    padding: 16px 22px;
     text-align: left;
     margin-top: 25px;
     color: #b45309;
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
@@ -372,7 +372,7 @@ select.edit-cell, input.edit-cell, div.edit-cell {
     background-color: #f8fafc;
     border-radius: 8px;
     font-family: inherit;
-    font-size: 0.9rem;
+    font-size: 1.05rem;
     color: var(--text-color);
     transition: all 0.2s ease;
     outline: none;
@@ -382,7 +382,7 @@ select.edit-cell, input.edit-cell, div.edit-cell {
 }
 
 select.edit-cell, input.edit-cell[type="time"] {
-    height: 38px;
+    height: 42px;
 }
 
 select.edit-cell:hover, input.edit-cell:hover, div.edit-cell:hover {
@@ -397,7 +397,7 @@ select.edit-cell:focus, input.edit-cell:focus, div.edit-cell:focus {
 }
 
 div.edit-cell {
-    min-height: 38px;
+    min-height: 42px;
     text-align: left;
     white-space: pre-wrap;
     word-break: break-word;
@@ -407,20 +407,21 @@ div.edit-cell {
 /* Select specific styling */
 select.edit-cell {
     cursor: pointer;
-    min-width: 140px;
+    min-width: 150px;
 }
 
 /* Inputs specific styling */
 input.edit-cell[type="time"] {
-    max-width: 90px;
+    max-width: 110px;
     text-align: center;
+    font-weight: 600;
 }
 
 .text-left {
     text-align: left !important;
 }
 .text-small {
-    font-size: 0.85rem;
+    font-size: 1rem;
 }
 
 .badge {
