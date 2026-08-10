@@ -399,9 +399,12 @@ function applyFontScale(scale) {
     scale = Math.min(180, Math.max(80, parseInt(scale) || 100));
     appState.ajustes.fontScale = scale;
 
+    const basePx = 18;
+    const currentPx = basePx * (scale / 100);
+
     const captureArea = document.getElementById('planilla-capture-area');
     if (captureArea) {
-        captureArea.style.setProperty('--planilla-scale', (scale / 100));
+        captureArea.style.fontSize = `${currentPx}px`;
     }
 
     const range1 = document.getElementById('font-size-range');
@@ -741,11 +744,15 @@ function renderPlanilla() {
 
 function exportarImagen() {
     const el = document.getElementById('planilla-capture-area');
-    // Forzamos un estilo temporal para la captura
+    const scale = appState.ajustes.fontScale || 100;
+    const basePx = 18;
+    const currentPx = basePx * (scale / 100);
+
+    el.style.fontSize = `${currentPx}px`;
     el.style.background = 'white';
     el.style.padding = '20px';
     
-    // Ocultamos bordes, fondo y sombras de inputs para la foto
+    // Ocultamos bordes, fondo y sombras de inputs para la foto y asignamos fontSize explícito
     const inputs = el.querySelectorAll('input.edit-cell, select.edit-cell, div.edit-cell');
     inputs.forEach(i => {
         i.style.border = 'none';
@@ -755,9 +762,10 @@ function exportarImagen() {
         i.style.webkitAppearance = 'none';
         i.style.color = '#000000';
         i.style.fontWeight = '700';
+        i.style.fontSize = `${currentPx}px`;
     });
 
-    html2canvas(el, { scale: 2.5 }).then(canvas => {
+    html2canvas(el, { scale: 2.5, logging: false }).then(canvas => {
         // Restaurar estilos
         inputs.forEach(i => {
             i.style.border = '';
@@ -767,11 +775,12 @@ function exportarImagen() {
             i.style.webkitAppearance = '';
             i.style.color = '';
             i.style.fontWeight = '';
+            i.style.fontSize = '';
         });
 
         const link = document.createElement('a');
         link.download = `Planilla_Territorios_${appState.ultimoGenerado.fecha}.png`;
-        link.href = canvas.toDataURL();
+        link.href = canvas.toDataURL('image/png');
         link.click();
     });
 }
