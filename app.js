@@ -24,6 +24,13 @@ function loadState() {
         if (!appState.ajustes.fontScale) {
             appState.ajustes.fontScale = 100;
         }
+        if (!appState.ajustes.turnosActivos) {
+            appState.ajustes.turnosActivos = {
+                marM: true, marT: true, mieM: true,
+                jueM: true, jueT: true, vieM: true,
+                vieT: true, sabM: true, sabT: true
+            };
+        }
         if (!appState.historial) {
             appState.historial = [];
         }
@@ -153,6 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btn-print').addEventListener('click', () => window.print());
     document.getElementById('btn-save-horarios').addEventListener('click', saveAjustes);
     document.getElementById('btn-save-zoom').addEventListener('click', saveAjustes);
+    document.getElementById('btn-save-turnos-activos').addEventListener('click', saveAjustes);
 
     // Permitir guardar la fecha cuando se edita manualmente
     document.getElementById('week-date-range').addEventListener('blur', (e) => {
@@ -455,6 +463,17 @@ function renderAjustes() {
     document.getElementById('setting-zoom-lluvia').value = appState.ajustes.zoomLluvia || '';
     document.getElementById('setting-zoom-miercoles').value = appState.ajustes.zoomMiercoles || 'ZOOM';
     applyFontScale(appState.ajustes.fontScale || 100);
+
+    const ta = appState.ajustes.turnosActivos || {};
+    document.getElementById('turno-activo-marM').checked = ta.marM !== false;
+    document.getElementById('turno-activo-marT').checked = ta.marT !== false;
+    document.getElementById('turno-activo-mieM').checked = ta.mieM !== false;
+    document.getElementById('turno-activo-jueM').checked = ta.jueM !== false;
+    document.getElementById('turno-activo-jueT').checked = ta.jueT !== false;
+    document.getElementById('turno-activo-vieM').checked = ta.vieM !== false;
+    document.getElementById('turno-activo-vieT').checked = ta.vieT !== false;
+    document.getElementById('turno-activo-sabM').checked = ta.sabM !== false;
+    document.getElementById('turno-activo-sabT').checked = ta.sabT !== false;
 }
 
 function saveAjustes() {
@@ -462,6 +481,18 @@ function saveAjustes() {
     appState.ajustes.horaT = document.getElementById('setting-hora-t').value;
     appState.ajustes.zoomLluvia = document.getElementById('setting-zoom-lluvia').value;
     appState.ajustes.zoomMiercoles = document.getElementById('setting-zoom-miercoles').value;
+    
+    if (!appState.ajustes.turnosActivos) appState.ajustes.turnosActivos = {};
+    appState.ajustes.turnosActivos.marM = document.getElementById('turno-activo-marM').checked;
+    appState.ajustes.turnosActivos.marT = document.getElementById('turno-activo-marT').checked;
+    appState.ajustes.turnosActivos.mieM = document.getElementById('turno-activo-mieM').checked;
+    appState.ajustes.turnosActivos.jueM = document.getElementById('turno-activo-jueM').checked;
+    appState.ajustes.turnosActivos.jueT = document.getElementById('turno-activo-jueT').checked;
+    appState.ajustes.turnosActivos.vieM = document.getElementById('turno-activo-vieM').checked;
+    appState.ajustes.turnosActivos.vieT = document.getElementById('turno-activo-vieT').checked;
+    appState.ajustes.turnosActivos.sabM = document.getElementById('turno-activo-sabM').checked;
+    appState.ajustes.turnosActivos.sabT = document.getElementById('turno-activo-sabT').checked;
+
     saveState();
     alert('Ajustes guardados correctamente.');
     if (appState.ultimoGenerado) renderPlanilla(); // Actualiza la vista de planilla
@@ -524,8 +555,19 @@ function generarPlanilla() {
     let territoriosUsados = {};
 
     estructuraSemana.forEach(dia => {
-        const totalTurnos = dia.turnos.length;
-        dia.turnos.forEach((turno, index) => {
+        // Filtrar turnos según la configuración en appState.ajustes.turnosActivos
+        const turnosActivosDelDia = dia.turnos.filter(turno => {
+            const key = dia.diaId + turno.id; // ej: marM, sabT
+            if (appState.ajustes.turnosActivos && appState.ajustes.turnosActivos[key] === false) {
+                return false;
+            }
+            return true;
+        });
+
+        if (turnosActivosDelDia.length === 0) return;
+
+        const totalTurnos = turnosActivosDelDia.length;
+        turnosActivosDelDia.forEach((turno, index) => {
             let row = {
                 diaNombre: index === 0 ? dia.nombreDia : '',
                 totalTurnos: index === 0 ? totalTurnos : 0,

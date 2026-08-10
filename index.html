@@ -187,6 +187,25 @@
                     </div>
 
                     <div class="card">
+                        <h3>Turnos Activos Semanales</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 15px;">
+                            Desmarca los turnos que no tendrán salida temporalmente (ej. si suspenden los sábados a la tarde). Esto evitará que se agreguen a la planilla.
+                        </p>
+                        <div class="checkbox-grid" style="margin-bottom: 15px;">
+                            <label><input type="checkbox" id="turno-activo-marM" checked> Martes M</label>
+                            <label><input type="checkbox" id="turno-activo-marT" checked> Martes T</label>
+                            <label><input type="checkbox" id="turno-activo-mieM" checked> Miércoles M</label>
+                            <label><input type="checkbox" id="turno-activo-jueM" checked> Jueves M</label>
+                            <label><input type="checkbox" id="turno-activo-jueT" checked> Jueves T</label>
+                            <label><input type="checkbox" id="turno-activo-vieM" checked> Viernes M</label>
+                            <label><input type="checkbox" id="turno-activo-vieT" checked> Viernes T</label>
+                            <label><input type="checkbox" id="turno-activo-sabM" checked> Sábado M</label>
+                            <label><input type="checkbox" id="turno-activo-sabT" checked> Sábado T</label>
+                        </div>
+                        <button id="btn-save-turnos-activos" class="btn btn-primary">Guardar Turnos</button>
+                    </div>
+
+                    <div class="card">
                         <h3>Tamaño de Letra de Planilla</h3>
                         <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 15px;">
                             Ajusta el tamaño del texto para regular la lectura en pantalla y en la foto PNG exportada.
