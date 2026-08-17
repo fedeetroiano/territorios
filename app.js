@@ -994,8 +994,17 @@ function importarDatos(e) {
                     saveState();
                     location.reload();
                 }
+            } else if (Array.isArray(imported) && imported.length > 0 && imported[0].fecha) {
+                // Detectamos que es un array de historial (nuestro archivo JSON de las imágenes)
+                if (confirm('El archivo detectado contiene un listado de historial. ¿Deseas agregarlo a tu historial actual sin borrar tus conductores y territorios?')) {
+                    if (!appState.historial) appState.historial = [];
+                    appState.historial.push(...imported);
+                    saveState();
+                    alert('¡Historial agregado con éxito!');
+                    location.reload();
+                }
             } else {
-                alert('El archivo no parece ser una copia de seguridad válida.');
+                alert('El archivo no parece ser una copia de seguridad válida ni un historial compatible.');
             }
         } catch (err) {
             alert('Error al leer el archivo. Asegúrate de que sea un JSON válido.');
